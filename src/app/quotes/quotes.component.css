@@ -1,0 +1,9 @@
+.quote {
+    margin-bottom: 10px;
+}
+
+.card {
+    width: 31% !important;
+    display: inline-block;
+    margin: 10px;
+}

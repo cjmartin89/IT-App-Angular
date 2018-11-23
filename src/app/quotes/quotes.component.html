@@ -1,0 +1,19 @@
+<app-quote-edit 
+    (quoteAdded)="onQuoteAdded($event)">
+  </app-quote-edit>
+<div class="row">
+  <div class="col-xs-12">
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <a href="#" class="list-group-item clearfix quote card" 
+    *ngFor="let quote of quotes">
+      <div class="pull-left">
+        <h4 class="list-group-item-heading">{{quote.quote}}</h4>
+        <h4 class="list-group-item-text">{{quote.person}}</h4>
+      </div>
+    </a>
+  </div>
+</div>
