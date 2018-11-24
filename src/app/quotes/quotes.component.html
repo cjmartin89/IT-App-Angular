@@ -7,10 +7,13 @@
 </div>
 <hr>
 <div class="row">
-  <input type="text" [(ngModel)]="filteredStatus">
+    <div class="col-sm-5 form-group margin-left">
+        <label for="quote" class="searchLabel">Filter by Person</label>
+        <input type="text" class="searchInput" [(ngModel)]="filteredStatus">
+    </div>
   <div class="col-xs-12">
     <a href="#" class="list-group-item clearfix quote card" 
-    *ngFor="let quote of quotes; let i = index"
+    *ngFor="let quote of quotes | filter:filteredStatus:'person'; let i = index"
     (click)="onEditItem(i)"
     >
       <div class="pull-left">

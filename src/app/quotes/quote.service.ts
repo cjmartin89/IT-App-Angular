@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Quote } from './quotes.model';
 import { Subject } from 'rxjs';
-import { DataStorageService } from '../shared/data-storage.service';
-
 
 @Injectable()
 export class QuoteService {

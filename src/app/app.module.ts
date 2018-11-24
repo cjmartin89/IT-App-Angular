@@ -10,13 +10,15 @@ import { HttpModule } from '@angular/http';
 import { DataStorageService } from './shared/data-storage.service';
 import { QuoteEditComponent } from './quotes/quote-edit/quote-edit.component';
 import { FormsModule } from '@angular/forms';
+import { FilterPipe } from './quotes/filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     QuotesComponent,
-    QuoteEditComponent
+    QuoteEditComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
