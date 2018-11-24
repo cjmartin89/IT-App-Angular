@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Quote } from './quotes.model';
 import { QuoteService } from './quote.service';
 import { DataStorageService } from '../shared/data-storage.service';
-import { Response } from '@angular/http';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,6 +12,7 @@ import { Subscription } from 'rxjs';
 export class QuotesComponent implements OnInit, OnDestroy {
   quotes: Quote[];
   private subscription: Subscription;
+  filteredStatus = '';
 
   constructor(private dataStorageService: DataStorageService, private quoteService: QuoteService) {}
 
@@ -25,14 +25,22 @@ export class QuotesComponent implements OnInit, OnDestroy {
     console.log(this.quotes);
   }
 
-  ngOnInit() {
-    this.dataStorageService.getQuotes();
+  refreshQuotes() {
     this.quoteService.quotesChanged
       .subscribe(
         (quotes: Quote[]) => {
           this.quotes = quotes;
         }
       );
+  }
+
+  onEditItem(index: number) {
+    this.quoteService.startedEditing.next(index);
+  }
+
+  ngOnInit() {
+    this.dataStorageService.getQuotes();
+    this.refreshQuotes();
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

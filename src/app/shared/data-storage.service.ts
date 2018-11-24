@@ -9,12 +9,14 @@ export class DataStorageService {
 
     constructor(private http: Http, private quoteService: QuoteService) {}
 
+    baseUrl = 'https://calm-savannah-82295.herokuapp.com/quotes';
+
     storeQuotes(quote: Quote) {
-           return this.http.post('http://localhost:3000/quotes', quote);
+           return this.http.post(this.baseUrl, quote);
     }
 
     getQuotes() {
-        this.http.get('https://calm-savannah-82295.herokuapp.com/quotes')
+        this.http.get(this.baseUrl)
         .subscribe(
             (response: Response) => {
                 const quotes: Quote[] = response.json();
@@ -22,4 +24,9 @@ export class DataStorageService {
             }
         );
     }
+
+    // deleteQuote(pk: number) {
+    //     const url = this.baseUrl + '/' + pk;
+    //     this.http.delete(url);
+    // }
 }

@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Quote } from './quotes.model';
 import { Subject } from 'rxjs';
+import { DataStorageService } from '../shared/data-storage.service';
 
 
 @Injectable()
 export class QuoteService {
     quotesChanged = new Subject<Quote[]>();
+    startedEditing = new Subject<number>();
+
+    baseUrl = 'https://calm-savannah-82295.herokuapp.com/quotes';
 
     private quotes: Quote[] = [
     ];
@@ -22,11 +26,25 @@ export class QuoteService {
         this.quotes.push(newQuote);
     }
 
-    // storeQuote() {
-    //     return this.http.post('localhost:3000/quotes', this.quote);
-    // }
-
     getQuotes() {
         return this.quotes.slice();
+    }
+
+    getQuote(index: number) {
+        return this.quotes[index];
+    }
+
+    updateQuote(index: number, newQuote: Quote) {
+        const quoteToUpdate = this.quotes[index];
+        const pk = quoteToUpdate.pk;
+        const url = this.baseUrl + '/' + pk + '/';
+        return this.http.put(url, newQuote);
+    }
+
+    deleteQuote(index: number) {
+        const quoteToDelete = this.quotes[index];
+        const pk = quoteToDelete.pk;
+        const url = this.baseUrl + '/' + pk + '/';
+        return this.http.delete(url);
     }
 }

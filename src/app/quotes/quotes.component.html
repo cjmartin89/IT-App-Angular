@@ -7,9 +7,12 @@
 </div>
 <hr>
 <div class="row">
+  <input type="text" [(ngModel)]="filteredStatus">
   <div class="col-xs-12">
     <a href="#" class="list-group-item clearfix quote card" 
-    *ngFor="let quote of quotes">
+    *ngFor="let quote of quotes; let i = index"
+    (click)="onEditItem(i)"
+    >
       <div class="pull-left">
         <h4 class="list-group-item-heading">{{quote.quote}}</h4>
         <h4 class="list-group-item-text">{{quote.person}}</h4>
